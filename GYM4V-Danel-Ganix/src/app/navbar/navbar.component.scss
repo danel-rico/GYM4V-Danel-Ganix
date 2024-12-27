@@ -1,0 +1,43 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  /* Navbar */
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    position: relative;
+    padding: 20px 0;
+    border-bottom: 2px solid #cc6666;
+  }
+  
+  /* Contenido del navbar */
+  .navbar-content {
+    display: flex;
+    align-items: center;
+    gap:10px;
+  }
+
+  .logo-container {
+    position: absolute;
+    left: 20px; /* Distancia desde el borde izquierdo */
+    display: flex;
+    align-items: center;
+  }
+  
+  /* Logo */
+  .logo {
+    height: 70px;
+    width: 70px;
+  }
+  
+  /* Nombre de la marca */
+  .brand-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #cc6666;
+  }
