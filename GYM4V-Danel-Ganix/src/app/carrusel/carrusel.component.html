@@ -1,0 +1,16 @@
+<div class="carousel-container">
+    <button (click)="prevSlide()" class="arrow left">‹</button>
+    <div class="carousel">
+      <div *ngFor="let monitor of visibleMonitors" class="carousel-item">
+        <div class="card">
+          <i class="fas fa-trash icon"></i>
+          <i class="fas fa-edit icon"></i>
+          <div class="user-icon"></div>
+          <h3>{{ monitor.nombre }}</h3>
+          <p>{{ monitor.email }}</p>
+          <p>{{ monitor.telefono }}</p>
+        </div>
+      </div>
+    </div>
+    <button (click)="nextSlide()" class="arrow right">›</button>
+  </div>
