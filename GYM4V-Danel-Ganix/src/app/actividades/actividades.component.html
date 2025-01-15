@@ -1,39 +1,31 @@
 
+
 <div class="schedule-container container mt-4">
-    <!-- Cabecera con calendario y navegación entre fechas -->
     <div class="header d-flex justify-content-between align-items-center mb-4">
-      <!-- Botón para cambiar a la fecha anterior -->
-      <div class="arrow text-danger fs-4" (click)="changeDate(-1)">
+      <div class="arrow text-danger fs-4">
         <i class="fas fa-arrow-left"></i>
       </div>
   
-      <!-- Selector de fecha con un input tipo date -->
       <input 
         type="date" 
         class="form-control w-25 text-center" 
-        [value]="currentDate" 
-        (change)="onDateChange($event)" 
+         
       />
   
-      <!-- Botón para cambiar a la fecha siguiente -->
-      <div class="arrow text-danger fs-4" (click)="changeDate(1)">
+      <div class="arrow text-danger fs-4" >
         <i class="fas fa-arrow-right"></i>
       </div>
     </div>
   
-    <!-- Lista de actividades del día -->
     <div class="schedule d-grid gap-3">
       <div *ngFor="let activity of activities; let i = index">
         <div class="row align-items-center">
-          <!-- Hora de la actividad -->
           <div class="col-3 text-end text-secondary fs-5">{{ activity.time }}</div>
   
-          <!-- Card de actividad -->
           <div class="col cell d-flex align-items-center justify-content-between p-3 border rounded"
             [class.bg-light]="!activity.isFree"
             [class.bg-success]="activity.isFree"
             [class.text-white]="activity.isFree">
-            <!-- Información de la actividad (ocupada) -->
             <div *ngIf="!activity.isFree" class="details d-flex align-items-center">
               <div class="icon me-3 text-danger fs-4">
                 <i [class.fas]="activity.monitors.length > 1" 
@@ -41,25 +33,23 @@
                    [class.fa-user]="activity.monitors.length === 1"></i>
               </div>
               <div class="name text-danger fs-5">
-                {{ activity.type }} - {{ activity.monitors.join(', ') }}
+               
               </div>
             </div>
   
-            <!-- Botones de editar/eliminar actividad -->
             <div *ngIf="!activity.isFree" class="actions d-flex flex-column">
-              <div class="action text-danger fs-4" (click)="openEditModal(i)">
+              <div class="action text-danger fs-4" >
                 <i class="fas fa-edit"></i>
               </div>
-              <div class="action text-danger fs-4" (click)="deleteActivity(i)">
+              <div class="action text-danger fs-4" >
                 <i class="fas fa-trash"></i>
               </div>
             </div>
   
-            <!-- Información de actividad libre -->
             <div *ngIf="activity.isFree" class="fw-bold text-center">
               FREE
               <div class="actions position-absolute top-0 end-0 mt-2 me-2">
-                <div class="action text-white fs-4" (click)="openAddModal(i)">
+                <div class="action text-white fs-4" >
                   <i class="fas fa-plus"></i>
                 </div>
               </div>
@@ -69,24 +59,22 @@
       </div>
     </div>
   
-    <!-- Modal para agregar o editar actividades -->
     <div id="addActivityModal" class="modal fade" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">{{ isEditing ? 'Editar Actividad' : 'Agregar Actividad' }}</h5>
-            <button type="button" class="btn-close" (click)="closeAddModal()"></button>
+            <h5 class="modal-title"></h5>
+            <button type="button" class="btn-close" ></button>
           </div>
           <div class="modal-body">
             <form>
-              <!-- Selección del tipo de actividad -->
               <div class="mb-3">
                 <label for="activityType" class="form-label">Tipo de Actividad</label>
                 <select
                   id="activityType"
                   class="form-select"
-                  (change)="onInputChange($event, 'type')"
-                  [value]="newActivity.type">
+                 
+                 >
                   <option value="Spinning">Spinning</option>
                   <option value="BodyPump">BodyPump</option>
                   <option value="Cycling">Cycling</option>
@@ -94,27 +82,22 @@
                 </select>
               </div>
   
-              <!-- Selección de monitores -->
+           
               <div class="mb-3">
                 <label for="monitors" class="form-label">Monitores</label>
                 <select
                   id="monitors"
                   class="form-select"
                   multiple
-                  (change)="onMonitorsChange($event)">
-                  <option
-                    *ngFor="let monitor of monitors"
-                    [value]="monitor"
-                    [selected]="newActivity.monitors.includes(monitor)">
-                    {{ monitor }}
-                  </option>
+                >
+                 
                 </select>
               </div>
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" (click)="closeAddModal()">Cerrar</button>
-            <button type="button" class="btn btn-primary" (click)="saveActivity()">
+            <button type="button" class="btn btn-secondary" >Cerrar</button>
+            <button type="button" class="btn btn-primary">
               {{ isEditing ? 'Guardar' : 'Agregar' }}
             </button>
           </div>

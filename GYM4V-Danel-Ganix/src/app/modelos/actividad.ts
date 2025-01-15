@@ -5,6 +5,7 @@ export class Actividad {
       public type: string,
       public isFree: boolean,
       public monitors: string[] = [],
+      public date?: string 
     ) {}
   }
   
