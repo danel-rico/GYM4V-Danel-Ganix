@@ -1,0 +1,47 @@
+.schedule-container {
+    width: 100%;
+    max-width: 800px;
+  
+    .header {
+      .arrow {
+        cursor: pointer;
+      }
+    }
+  
+    .schedule {
+      .cell {
+        position: relative;
+  
+        .details {
+          .icon {
+            font-size: 30px;
+          }
+          .name {
+            font-size: 18px;
+          }
+        }
+  
+        .actions {
+          .action {
+            cursor: pointer;
+            margin: 5px 0;
+          }
+        }
+  
+        &.free {
+          .actions {
+            .action {
+              font-size: 24px;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  
+  input[type='date'] {
+    max-width: 200px;
+    text-align: center;
+  }
+  

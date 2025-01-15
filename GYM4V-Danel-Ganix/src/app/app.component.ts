@@ -1,16 +1,31 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { CardMonitorComponent } from "./card-monitor/card-monitor.component";
-import {  CarouselComponent } from "./carrusel/carrusel.component";
+import { CarouselComponent } from "./carrusel/carrusel.component";
 import { BarraBusquedaAnyadirComponent } from "./barra-busqueda-anyadir/barra-busqueda-anyadir.component";
+import { ActividadesComponent } from "./actividades/actividades.component";
+import { FooterComponent } from "./footer/footer.component";
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, NavbarComponent, CardMonitorComponent, CarouselComponent, BarraBusquedaAnyadirComponent],
+  imports: [
+    CommonModule,
+    NavbarComponent,
+    CardMonitorComponent,
+    CarouselComponent,
+    BarraBusquedaAnyadirComponent,
+    ActividadesComponent,
+    FooterComponent
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'GYM4V-Danel-Ganix';
+  view: 'monitores' | 'actividades' = 'monitores';
+
+  setView(view: 'monitores' | 'actividades') {
+    this.view = view;
+  }
 }

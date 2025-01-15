@@ -1,6 +1,13 @@
 <app-navbar></app-navbar>
-<app-card-monitor></app-card-monitor>
-<app-barra-busqueda-anyadir></app-barra-busqueda-anyadir>
-<app-carrusel></app-carrusel>
-<!-- The routed views render in the <router-outlet>-->
-<router-outlet></router-outlet>
+
+<div *ngIf="view === 'monitores'">
+  <app-card-monitor></app-card-monitor>
+  <app-barra-busqueda-anyadir></app-barra-busqueda-anyadir>
+  <app-carrusel></app-carrusel>
+</div>
+
+<div *ngIf="view === 'actividades'">
+  <app-actividades></app-actividades>
+</div>
+
+<app-footer (changeView)="setView($event)"></app-footer>
