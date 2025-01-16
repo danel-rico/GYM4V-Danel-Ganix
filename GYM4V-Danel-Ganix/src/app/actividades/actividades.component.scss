@@ -1,47 +1,58 @@
 .schedule-container {
-    width: 100%;
-    max-width: 800px;
-  
-    .header {
-      .arrow {
-        cursor: pointer;
-      }
+  width: 100%;
+  max-width: 800px;
+
+  .header {
+    .arrow {
+      cursor: pointer;
     }
-  
-    .schedule {
-      .cell {
-        position: relative;
-  
-        .details {
-          .icon {
-            font-size: 30px;
-          }
-          .name {
-            font-size: 18px;
-          }
-        }
-  
-        .actions {
-          .action {
-            cursor: pointer;
-            margin: 5px 0;
-          }
-        }
-  
-        &.free {
-          .actions {
-            .action {
-              font-size: 24px;
-            }
-          }
-        }
+  }
+
+  .schedule {
+    .row {
+      margin: 0;
+    }
+
+    .cell {
+      height: 150px; /* Altura fija para todas las tarjetas */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border: none; /* Sin bordes */
+    }
+
+    .bg-light {
+      background-color: #dbdbdb !important; /* Fondo gris claro para actividades */
+    }
+
+    .bg-success {
+      background-color: #269d42 !important; /* Fondo verde para "FREE" */
+    }
+
+    .text-danger {
+      color: #dc3545 !important; /* Rojo original */
+    }
+
+    .free-content {
+      font-size: 24px;
+      color: #fff;
+      text-align: center;
+    }
+
+    .activity-icon {
+      margin-right: 50px; /* Separación del ícono de los botones */
+    }
+
+    .actions {
+      .action {
+        margin: 5px 0;
       }
     }
   }
-  
-  
-  input[type='date'] {
-    max-width: 200px;
-    text-align: center;
-  }
-  
+}
+
+input[type='date'] {
+  max-width: 200px;
+  text-align: center;
+}
+

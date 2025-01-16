@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { CommonModule } from '@angular/common';
 import { ActividadService } from '../servicios/actividad.service';
 import { MonitorService } from '../servicios/monitor.service';
 import { Actividad } from '../modelos/actividad';
@@ -8,7 +8,7 @@ import { Actividad } from '../modelos/actividad';
   selector: 'app-actividades',
   templateUrl: './actividades.component.html',
   styleUrls: ['./actividades.component.scss'],
-  imports: [CommonModule], // Asegúrate de incluir CommonModule aquí
+  imports: [CommonModule],
 })
 export class ActividadesComponent implements OnInit {
   activities: Actividad[] = [];
@@ -18,6 +18,8 @@ export class ActividadesComponent implements OnInit {
   newActivity: { type: string; monitors: string[] } = { type: '', monitors: [] };
   isEditing: boolean = false;
 
+  activityRequirements: { type: string; requiredMonitors: number }[] = [];
+
   constructor(
     private actividadService: ActividadService,
     private monitorService: MonitorService
@@ -25,18 +27,22 @@ export class ActividadesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadActivities();
+    this.loadActivityRequirements();
     this.monitorService.getMonitors().subscribe((data) => {
       this.monitors = data.map((monitor) => monitor.nombre);
     });
   }
-  
+
   loadActivities(): void {
     this.activities = this.actividadService.getActivitiesByDate(this.currentDate);
     if (!this.activities.length) {
       console.error('No se encontraron actividades para esta fecha.');
     }
   }
-  
+
+  loadActivityRequirements(): void {
+    this.activityRequirements = this.actividadService.getActivityRequirements();
+  }
 
   changeDate(days: number): void {
     const newDate = new Date(this.currentDate);
@@ -81,12 +87,36 @@ export class ActividadesComponent implements OnInit {
     }
   }
 
-  validateMonitors(type: string, monitors: string[]): boolean {
-    const requiredMonitors = type === 'BodyPump' ? 2 : 1;
-    return monitors.length === requiredMonitors;
+  validateActivity(): boolean {
+    if (!this.newActivity.type) {
+      alert('Debe seleccionar un tipo de actividad.');
+      return false;
+    }
+
+    const requirement = this.activityRequirements.find(
+      (req) => req.type === this.newActivity.type
+    );
+
+    if (!requirement) {
+      alert('El tipo de actividad no es válido.');
+      return false;
+    }
+
+    if (this.newActivity.monitors.length !== requirement.requiredMonitors) {
+      alert(
+        `El tipo de actividad ${this.newActivity.type} requiere exactamente ${requirement.requiredMonitors} monitor(es).`
+      );
+      return false;
+    }
+
+    return true;
   }
 
   saveActivity(): void {
+    if (!this.validateActivity()) {
+      return;
+    }
+
     const activity = new Actividad(
       this.activities[this.selectedCellIndex!].id,
       this.activities[this.selectedCellIndex!].time,
@@ -119,4 +149,6 @@ export class ActividadesComponent implements OnInit {
     const selectedOptions = Array.from((event.target as HTMLSelectElement).selectedOptions);
     this.newActivity.monitors = selectedOptions.map((option) => option.value);
   }
+ 
+  
 }
