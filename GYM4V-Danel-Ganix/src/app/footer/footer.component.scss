@@ -1,25 +1,49 @@
 .footer {
-    position: fixed;
-    bottom: 0;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #ffffff;
+  border-top: 1px solid #ddd;
+
+  .footer-table {
     width: 100%;
-    background-color: #d25b5b;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-  }
-  
-  .footer-button {
-    background-color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 16px;
-    color: #d25b5b;
-    cursor: pointer;
-    border-radius: 5px;
-    transition: background-color 0.3s;
-  
-    &:hover {
-      background-color: #f2dede;
+    height: 80px; /* Altura total del footer */
+    table-layout: fixed; /* Columnas del mismo tamaño */
+    text-align: center;
+
+    td {
+      position: relative; /* Necesario para la línea superior */
+      vertical-align: middle; /* Alineación del contenido */
+      cursor: pointer;
+      font-size: 18px;
+      font-weight: 500;
+      color: #6c757d;
+      transition: color 0.3s;
+
+      i {
+        font-size: 30px; /* Tamaño del ícono */
+        display: block; /* Ícono y texto en columnas */
+        margin-bottom: 5px; /* Separación entre ícono y texto */
+      }
+
+      &:hover {
+        color: #dc3545; /* Cambiar a rojo en hover */
+      }
+
+      &.active {
+        color: #dc3545; /* Color rojo para la opción activa */
+
+        /* Línea superior gruesa */
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 25%; /* Ocupa la mitad del ancho */
+          right: 25%;
+          height: 5px; /* Grosor de la línea */
+          background-color: #dc3545; /* Color rojo */
+        }
+      }
     }
   }
-  
+}

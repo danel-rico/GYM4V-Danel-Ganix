@@ -1,5 +1,25 @@
 <div class="footer">
-    <button class="footer-button" (click)="switchTo('monitores')">Monitores</button>
-    <button class="footer-button" (click)="switchTo('actividades')">Actividades</button>
-  </div>
-  
+  <table class="footer-table">
+    <tr>
+      <!-- Columna para "ACTIVIDADES" -->
+      <td
+        class="footer-item"
+        [ngClass]="{ 'active': isActive('actividades') }"
+        (click)="switchTo('actividades')"
+      >
+        <i class="fa-solid fa-calendar-alt"></i>
+        <span>ACTIVIDADES</span>
+      </td>
+
+      <!-- Columna para "MONITORES" -->
+      <td
+        class="footer-item"
+        [ngClass]="{ 'active': isActive('monitores') }"
+        (click)="switchTo('monitores')"
+      >
+        <i class="fa-solid fa-user"></i>
+        <span>MONITORES</span>
+      </td>
+    </tr>
+  </table>
+</div>

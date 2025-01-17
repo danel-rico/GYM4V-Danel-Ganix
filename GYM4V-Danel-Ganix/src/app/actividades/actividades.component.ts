@@ -3,22 +3,28 @@ import { CommonModule } from '@angular/common';
 import { ActividadService } from '../servicios/actividad.service';
 import { MonitorService } from '../servicios/monitor.service';
 import { Actividad } from '../modelos/actividad';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 @Component({
   selector: 'app-actividades',
   templateUrl: './actividades.component.html',
   styleUrls: ['./actividades.component.scss'],
-  imports: [CommonModule],
+  imports: [CommonModule, CalendarComponent],
 })
 export class ActividadesComponent implements OnInit {
   activities: Actividad[] = [];
   monitors: string[] = [];
-  currentDate: string = new Date().toISOString().split('T')[0];
+  currentDate: Date = new Date(); // Fecha actual para las actividades
   selectedCellIndex: number | null = null;
   newActivity: { type: string; monitors: string[] } = { type: '', monitors: [] };
   isEditing: boolean = false;
 
-  activityRequirements: { type: string; requiredMonitors: number }[] = [];
+  activityRequirements: { type: string; requiredMonitors: number }[] = [
+    { type: 'Spinning', requiredMonitors: 1 },
+    { type: 'BodyPump', requiredMonitors: 2 },
+    { type: 'Running', requiredMonitors: 1 },
+    { type: 'Swimming', requiredMonitors: 3 },
+  ];
 
   constructor(
     private actividadService: ActividadService,
@@ -27,33 +33,29 @@ export class ActividadesComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadActivities();
-    this.loadActivityRequirements();
     this.monitorService.getMonitors().subscribe((data) => {
       this.monitors = data.map((monitor) => monitor.nombre);
     });
   }
 
   loadActivities(): void {
-    this.activities = this.actividadService.getActivitiesByDate(this.currentDate);
-    if (!this.activities.length) {
-      console.error('No se encontraron actividades para esta fecha.');
-    }
-  }
-
-  loadActivityRequirements(): void {
-    this.activityRequirements = this.actividadService.getActivityRequirements();
+    const formattedDate = this.formatDate(this.currentDate);
+    this.activities = this.actividadService.getActivitiesByDate(formattedDate);
   }
 
   changeDate(days: number): void {
-    const newDate = new Date(this.currentDate);
-    newDate.setDate(newDate.getDate() + days);
-    this.currentDate = newDate.toISOString().split('T')[0];
+    this.currentDate.setDate(this.currentDate.getDate() + days);
     this.loadActivities();
   }
 
   onDateChange(event: Event): void {
-    this.currentDate = (event.target as HTMLInputElement).value;
+    this.currentDate = new Date((event.target as HTMLInputElement).value);
     this.loadActivities();
+  }
+
+  onDateSelected(selectedDate: Date): void {
+    this.currentDate = new Date(selectedDate); // Actualiza la fecha seleccionada
+    this.loadActivities(); // Recarga las actividades
   }
 
   openAddModal(cellIndex: number): void {
@@ -104,7 +106,7 @@ export class ActividadesComponent implements OnInit {
 
     if (this.newActivity.monitors.length !== requirement.requiredMonitors) {
       alert(
-        `El tipo de actividad ${this.newActivity.type} requiere exactamente ${requirement.requiredMonitors} monitor(es).`
+        `El tipo de actividad "${this.newActivity.type}" requiere exactamente ${requirement.requiredMonitors} monitor(es).`
       );
       return false;
     }
@@ -123,10 +125,10 @@ export class ActividadesComponent implements OnInit {
       this.newActivity.type,
       false,
       [...this.newActivity.monitors],
-      this.currentDate
+      this.formatDate(this.currentDate)
     );
 
-    this.actividadService.updateActivity(this.currentDate, this.selectedCellIndex!, activity);
+    this.actividadService.updateActivity(this.formatDate(this.currentDate), this.selectedCellIndex!, activity);
     this.loadActivities();
     this.closeAddModal();
   }
@@ -134,9 +136,9 @@ export class ActividadesComponent implements OnInit {
   deleteActivity(index: number): void {
     const activity = this.activities[index];
     this.actividadService.updateActivity(
-      this.currentDate,
+      this.formatDate(this.currentDate),
       index,
-      new Actividad(activity.id, activity.time, '', true, [], this.currentDate)
+      new Actividad(activity.id, activity.time, '', true, [], this.formatDate(this.currentDate))
     );
     this.loadActivities();
   }
@@ -149,6 +151,17 @@ export class ActividadesComponent implements OnInit {
     const selectedOptions = Array.from((event.target as HTMLSelectElement).selectedOptions);
     this.newActivity.monitors = selectedOptions.map((option) => option.value);
   }
- 
-  
+
+  private formatDate(date: Date): string {
+    return date.toISOString().split('T')[0];
+  }
+
+  get formattedDate(): string {
+    return this.currentDate.toLocaleDateString('es-ES', {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  }
 }

@@ -34,6 +34,7 @@ export class ActividadService {
 
   getActivitiesByDate(date: string): Actividad[] {
     if (!this.activities[date]) {
+      // Si no hay actividades para la fecha, inicializamos con actividades vacías
       this.activities[date] = [
         new Actividad(1, '10:00 - 11:30', '', true, [], date),
         new Actividad(2, '13:30 - 15:00', '', true, [], date),
@@ -42,6 +43,7 @@ export class ActividadService {
     }
     return this.activities[date];
   }
+  
 
   updateActivity(date: string, index: number, activity: Actividad): void {
     if (this.activities[date]) {

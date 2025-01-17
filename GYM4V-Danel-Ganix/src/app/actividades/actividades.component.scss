@@ -1,58 +1,81 @@
 .schedule-container {
   width: 100%;
-  max-width: 800px;
+  max-width: 1200px; /* Mayor ancho para acomodar las columnas */
 
-  .header {
-    .arrow {
-      cursor: pointer;
-    }
+  .row {
+    margin: 0;
   }
 
-  .schedule {
-    .row {
-      margin: 0;
-    }
+  .cell {
+    height: 150px; /* Altura fija para las tarjetas */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none; /* Sin bordes */
+  }
 
-    .cell {
-      height: 150px; /* Altura fija para todas las tarjetas */
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border: none; /* Sin bordes */
-    }
+  .bg-light {
+    background-color: #dbdbdb !important; /* Fondo gris claro */
+  }
 
-    .bg-light {
-      background-color: #dbdbdb !important; /* Fondo gris claro para actividades */
-    }
+  .bg-success {
+    background-color: #269d42 !important; /* Fondo verde */
+  }
 
-    .bg-success {
-      background-color: #269d42 !important; /* Fondo verde para "FREE" */
-    }
+  .text-danger {
+    color: #dc3545 !important; /* Rojo original */
+  }
 
-    .text-danger {
-      color: #dc3545 !important; /* Rojo original */
-    }
+  .free-content {
+    font-size: 24px;
+    color: #fff;
+    text-align: center;
+  }
 
-    .free-content {
-      font-size: 24px;
+  .activity-icon {
+    margin-right: 50px; /* Separación del ícono de los botones */
+  }
+
+  .actions {
+    .action {
+      margin: 5px 0;
+    }
+  }
+}
+
+#calendar-container {
+  max-width: 300px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #fff;
+  padding: 10px;
+  margin: auto;
+
+  .actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+
+    .btn-primary {
+      background-color: #007bff;
       color: #fff;
-      text-align: center;
+      border: 1px solid #007bff;
+
+      &:hover {
+        background-color: transparent;
+        color: #007bff;
+      }
     }
 
-    .activity-icon {
-      margin-right: 50px; /* Separación del ícono de los botones */
-    }
+    .btn-secondary {
+      background-color: transparent;
+      color: #6c757d;
+      border: 1px solid #6c757d;
 
-    .actions {
-      .action {
-        margin: 5px 0;
+      &:hover {
+        background-color: #6c757d;
+        color: #fff;
       }
     }
   }
 }
-
-input[type='date'] {
-  max-width: 200px;
-  text-align: center;
-}
-

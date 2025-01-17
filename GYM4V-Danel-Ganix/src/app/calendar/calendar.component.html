@@ -1,0 +1,30 @@
+<div id="calendar-container">
+    <div class="header">
+      <button (click)="changeMonth(-1)">←</button>
+      <span id="month-year">{{ formattedMonthYear }}</span>
+      <button (click)="changeMonth(1)">→</button>
+    </div>
+  
+    <div class="weekdays">
+      <span *ngFor="let day of daysOfWeek">{{ day }}</span>
+    </div>
+  
+    <div id="days" class="days">
+      <ng-container *ngFor="let day of getDaysInMonth(); let i = index">
+        <span
+          *ngIf="day"
+          [class.active]="selectedDate?.getDate() === day"
+          (click)="selectDate(day)"
+        >
+          {{ day }}
+        </span>
+        <span *ngIf="!day"></span>
+      </ng-container>
+    </div>
+  
+    <div class="actions">
+      <button class="btn btn-primary" (click)="applyDate()">Aplicar</button>
+      <button class="btn btn-secondary" (click)="selectedDate = null">Cancelar</button>
+    </div>
+  </div>
+  

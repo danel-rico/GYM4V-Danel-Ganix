@@ -23,7 +23,7 @@ import { FooterComponent } from "./footer/footer.component";
 })
 export class AppComponent {
   title = 'GYM4V-Danel-Ganix';
-  view: 'monitores' | 'actividades' = 'monitores';
+  view: 'monitores' | 'actividades' = 'monitores'; 
 
   setView(view: 'monitores' | 'actividades') {
     this.view = view;

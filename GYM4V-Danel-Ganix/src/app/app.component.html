@@ -1,13 +1,15 @@
 <app-navbar></app-navbar>
 
+<!-- Vista de Monitores -->
 <div *ngIf="view === 'monitores'">
   <app-card-monitor></app-card-monitor>
   <app-barra-busqueda-anyadir></app-barra-busqueda-anyadir>
   <app-carrusel></app-carrusel>
 </div>
 
+<!-- Vista de Actividades -->
 <div *ngIf="view === 'actividades'">
   <app-actividades></app-actividades>
 </div>
 
-<app-footer (changeView)="setView($event)"></app-footer>
+<app-footer [currentView]="view" (changeView)="setView($event)"></app-footer>
