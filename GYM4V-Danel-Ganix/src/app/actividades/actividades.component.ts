@@ -19,11 +19,11 @@ export class ActividadesComponent implements OnInit {
   newActivity: { type: string; monitors: string[] } = { type: '', monitors: [] };
   isEditing: boolean = false;
 
-  activityRequirements: { type: string; requiredMonitors: number }[] = [
-    { type: 'Spinning', requiredMonitors: 1 },
-    { type: 'BodyPump', requiredMonitors: 2 },
-    { type: 'Running', requiredMonitors: 1 },
-    { type: 'Swimming', requiredMonitors: 3 },
+  activityRequirements: { type: string; requiredMonitors: number; icon: string }[] = [
+    { type: 'Spinning', requiredMonitors: 1, icon: 'fa-solid fa-bicycle' },
+    { type: 'BodyPump', requiredMonitors: 2, icon: 'fa-solid fa-dumbbell' },
+    { type: 'Running', requiredMonitors: 1, icon: 'fa-solid fa-person-running' },
+    { type: 'Swimming', requiredMonitors: 3, icon: 'fa-solid fa-person-swimming' },
   ];
 
   constructor(
@@ -119,18 +119,32 @@ export class ActividadesComponent implements OnInit {
       return;
     }
 
+    // Obtén el ícono correspondiente al tipo de actividad
+    const activityRequirement = this.activityRequirements.find(
+      (req) => req.type === this.newActivity.type
+    );
+    const icon = activityRequirement?.icon || ''; // Asigna un ícono vacío si no se encuentra
+
+    // Crea o actualiza la actividad
     const activity = new Actividad(
       this.activities[this.selectedCellIndex!].id,
       this.activities[this.selectedCellIndex!].time,
       this.newActivity.type,
       false,
       [...this.newActivity.monitors],
-      this.formatDate(this.currentDate)
+      this.formatDate(this.currentDate),
+      icon // Asigna el ícono correspondiente
     );
 
-    this.actividadService.updateActivity(this.formatDate(this.currentDate), this.selectedCellIndex!, activity);
-    this.loadActivities();
-    this.closeAddModal();
+    // Actualiza la actividad en el servicio
+    this.actividadService.updateActivity(
+      this.formatDate(this.currentDate),
+      this.selectedCellIndex!,
+      activity
+    );
+
+    this.loadActivities(); // Recarga las actividades
+    this.closeAddModal(); // Cierra el modal
   }
 
   deleteActivity(index: number): void {
