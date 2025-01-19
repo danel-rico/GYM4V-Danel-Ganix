@@ -51,17 +51,28 @@ body {
 }
 
 .profile-icon {
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    background-color: #ff6b6b;
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto 10px;
+    left: 81px;
     color: white;
     font-size: 30px;
+    position:absolute;
 }
+.info{
+    position: relative;
+    top: 20px;
+}
+
+/* bi:person-fill */
+
+
+
+
 
 .name {
     font-size: 18px;

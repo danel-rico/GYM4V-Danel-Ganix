@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Monitor } from '../modelos/monitor';
 import { MonitorService } from '../servicios/monitor.service';
 import { CommonModule } from '@angular/common';
+import { CardMonitorComponent } from "../card-monitor/card-monitor.component";
 
 @Component({
   selector: 'app-carrusel',
-  imports: [CommonModule],
+  imports: [CommonModule, CardMonitorComponent],
   templateUrl: './carrusel.component.html',
-  styleUrl: './carrusel.component.scss'
+  styleUrls: ['./carrusel.component.scss']
 })
 export class CarouselComponent implements OnInit {
   monitors: Monitor[] = [];       // Lista completa de monitores
@@ -35,21 +36,16 @@ export class CarouselComponent implements OnInit {
   }
 
   nextSlide(): void {
-    if (this.currentIndex + this.itemsPerPage < this.monitors.length) {
+    if (this.currentIndex + 3 < this.monitors.length ) {
       this.currentIndex++;
-      this.updateVisibleMonitors();
-    } else {
-      this.currentIndex = 0;
       this.updateVisibleMonitors();
     }
   }
 
   prevSlide(): void {
-    if (this.currentIndex > 0) {
+    if (this.currentIndex > 0){
       this.currentIndex--;
-      this.updateVisibleMonitors();
-    } else{
-      this.currentIndex= this.monitors.length - 1;
+      this.updateVisibleMonitors(); 
     }
   }
 }

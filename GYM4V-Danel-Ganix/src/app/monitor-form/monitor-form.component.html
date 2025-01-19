@@ -1,30 +1,41 @@
-<div class="formulario">
-    <svg class="logoperfil" width="150" height="150" viewBox="0 0 150 150" fill="none"
-        xmlns="http://www.w3.org/2000/svg">
-        <path
-            d="M12.5 150C12.5 150 0 150 0 137.5C0 125 12.5 87.5 75 87.5C137.5 87.5 150 125 150 137.5C150 150 137.5 150 137.5 150H12.5ZM75 75C84.9456 75 94.4839 71.0491 101.517 64.0165C108.549 56.9839 112.5 47.4456 112.5 37.5C112.5 27.5544 108.549 18.0161 101.517 10.9835C94.4839 3.95088 84.9456 0 75 0C65.0544 0 55.5161 3.95088 48.4835 10.9835C41.4509 18.0161 37.5 27.5544 37.5 37.5C37.5 47.4456 41.4509 56.9839 48.4835 64.0165C55.5161 71.0491 65.0544 75 75 75Z"
-            fill="#D25B5B" />
-    </svg>
-    <form #monitorForm="ngForm" (ngSubmit)="onSubmit(monitorForm)">
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Nombre</mat-label>
-            <input matInput name="name" ngModel required />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Email</mat-label>
-            <input matInput type="email" name="email" ngModel required email />
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Teléfono</mat-label>
-            <input matInput type="tel" name="phone" ngModel required pattern="^[0-9]{10}$" />
-        </mat-form-field>
-
-        <div class="button-container">
-            <button mat-raised-button color="primary" type="submit" [disabled]="monitorForm.invalid">Aceptar</button>
-            <button mat-raised-button color="warn" mat-dialog-close>Cancelar</button>
+<div class="formulario-container">
+    
+    <div class="myCard">
+        <div class="formulario-icono">
+            <svg width="120" height="120" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_6_10445)">
+                    <path
+                        d="M22.5 105C22.5 105 15 105 15 97.5C15 90 22.5 67.5 60 67.5C97.5 67.5 105 90 105 97.5C105 105 97.5 105 97.5 105H22.5ZM60 60C65.9674 60 71.6903 57.6295 75.9099 53.4099C80.1295 49.1903 82.5 43.4674 82.5 37.5C82.5 31.5326 80.1295 25.8097 75.9099 21.5901C71.6903 17.3705 65.9674 15 60 15C54.0326 15 48.3097 17.3705 44.0901 21.5901C39.8705 25.8097 37.5 31.5326 37.5 37.5C37.5 43.4674 39.8705 49.1903 44.0901 53.4099C48.3097 57.6295 54.0326 60 60 60Z"
+                        fill="#D25B5B" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_6_10445">
+                        <rect width="120" height="120" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+    
         </div>
-    </form>
-
+    
+        <!-- Formulario -->
+        <form [formGroup]="formulario" (ngSubmit)="onSubmit()" class="formulario">
+            <div class="form-group">
+                <input type="text" class="form-control" formControlName="nombre" placeholder="Nombre" />
+            </div>
+            <div class="form-group">
+                <input type="email" class="form-control" formControlName="email" placeholder="Email" />
+            </div>
+            <div class="form-group">
+                <input type="tel" class="form-control" formControlName="telefono" placeholder="Teléfono" />
+            </div>
+            <div class="botones">
+                <button type="submit" class="btn" [disabled]="formulario.invalid">
+                    ACEPTAR
+                </button>
+                <button type="button" class="btn" (click)="onCancelar()">
+                    CANCELAR
+                </button>
+            </div>
+        </form>
+    </div>
 </div>
