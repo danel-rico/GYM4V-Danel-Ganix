@@ -1,34 +1,32 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Monitor } from '../modelos/monitor';
 import { MonitorService } from '../servicios/monitor.service';
 import { FormBuilder, FormGroup, FormsModule, Validators, ReactiveFormsModule  } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 
-
-
-
-
-
 @Component({
-  selector: 'app-monitor-form',
+  selector: 'app-editar-form',
   imports: [FormsModule, MatFormFieldModule, MatIconModule, ReactiveFormsModule],
-  templateUrl: './monitor-form.component.html',
-  styleUrl: './monitor-form.component.scss'
+  templateUrl: './editar-form.component.html',
+  styleUrl: './editar-form.component.scss'
 })
-export class MonitorFormComponent {
+export class EditarFormComponent {
   monitors: Monitor[] = [];
-  editarMonitor: boolean = false;
-
+  formData: string = '';
   formulario: FormGroup;
+  nombre: string = '';
 
-  constructor(private fb: FormBuilder, private monitorsService: MonitorService) {
+  constructor(private dialogRef: MatDialogRef<EditarFormComponent>, @Inject(MAT_DIALOG_DATA) name: string, private fb: FormBuilder, private monitorsService: MonitorService) {
     this.formulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(2)]],
       email: ['', [Validators.required, Validators.email]],
       telefono: ['', [Validators.required, Validators.pattern(/^[0-9]{9}$/)]],
     });
+    this.nombre = name;
+
+    
   }
   ngOnInit(): void {
     this.loadMonitors();
@@ -44,6 +42,7 @@ export class MonitorFormComponent {
   onSubmit(): void {
     if (this.formulario.valid) {
       const nuevoMonitor = this.formulario.value;
+      
       //Vamos a comprobar que no exista un monitor con el mismo nombre
       for(let monitor of this.monitors) {
         if(monitor.nombre.toUpperCase() == nuevoMonitor.nombre.toUpperCase()) {
@@ -52,18 +51,22 @@ export class MonitorFormComponent {
         }
       }
       // Llamamos al servicio para añadir el monitor
-      this.monitorsService.addMonitor(nuevoMonitor);
+      this.monitorsService.editMonitorByName(this.nombre,nuevoMonitor);
 
       // Mostramos un alert con los datos añadidos
-      alert(`Monitor añadido:\n\nNombre: ${nuevoMonitor.nombre}\nEmail: ${nuevoMonitor.email}\nTeléfono: ${nuevoMonitor.telefono}`);
+      alert(`Monitor editado:\n\nNombre: ${nuevoMonitor.nombre}\nEmail: ${nuevoMonitor.email}\nTeléfono: ${nuevoMonitor.telefono}`);
 
-      //this.formulario.reset(); // Resetea el formulario tras enviarlo
-
+      //this.formulario.reset();
+      this.dialogRef.close(true);
     }
   }
 
   onCancelar(): void {
     this.formulario.reset(); // Resetea el formulario al pulsar cancelar
     alert('Formulario cancelado');
+    this.dialogRef.close(true);
+
+    
   }
+
 }

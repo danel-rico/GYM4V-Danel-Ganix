@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MonitorFormComponent } from '../monitor-form/monitor-form.component';
+import { MonitorService } from '../servicios/monitor.service';
 
 
 @Component({
@@ -11,8 +12,9 @@ import { MonitorFormComponent } from '../monitor-form/monitor-form.component';
 })
 export class BarraBusquedaAnyadirComponent {
   monitores: any[] = []; // Array para guardar los monitores
+  @Output() nameChange = new EventEmitter<string>();
 
-  constructor(public dialog: MatDialog) {}
+  constructor(public dialog: MatDialog, private monitorService: MonitorService) {}
 
   addMonitor() {
     const dialogRef = this.dialog.open(MonitorFormComponent, {
@@ -25,5 +27,10 @@ export class BarraBusquedaAnyadirComponent {
         console.log('Monitor añadido:', result);
       }
     });
+  }
+  onInputChange(event: Event): void {
+    const inputValue = (event.target as HTMLInputElement).value;
+    this.nameChange.emit(inputValue);
+    
   }
 }

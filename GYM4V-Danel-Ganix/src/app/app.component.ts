@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NavbarComponent } from "./navbar/navbar.component";
 import { CardMonitorComponent } from "./card-monitor/card-monitor.component";
-import { CarouselComponent } from "./carrusel/carrusel.component";
+import { CarruselComponent } from "./carrusel/carrusel.component";
 import { BarraBusquedaAnyadirComponent } from "./barra-busqueda-anyadir/barra-busqueda-anyadir.component";
 import { ActividadesComponent } from "./actividades/actividades.component";
 import { FooterComponent } from "./footer/footer.component";
@@ -12,12 +12,11 @@ import { FooterComponent } from "./footer/footer.component";
   imports: [
     CommonModule,
     NavbarComponent,
-    CardMonitorComponent,
-    CarouselComponent,
+    CarruselComponent,
     BarraBusquedaAnyadirComponent,
     ActividadesComponent,
     FooterComponent
-  ],
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
