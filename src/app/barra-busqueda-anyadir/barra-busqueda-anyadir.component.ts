@@ -12,9 +12,8 @@ import { MonitorService } from '../servicios/monitor.service';
 })
 export class BarraBusquedaAnyadirComponent {
   monitores: any[] = []; // Array para guardar los monitores
-  @Output() nameChange = new EventEmitter<string>();
 
-  constructor(public dialog: MatDialog, private monitorService: MonitorService) {}
+  constructor(public dialog: MatDialog, private monitorService: MonitorService) { }
 
   addMonitor() {
     const dialogRef = this.dialog.open(MonitorFormComponent, {
@@ -30,7 +29,6 @@ export class BarraBusquedaAnyadirComponent {
   }
   onInputChange(event: Event): void {
     const inputValue = (event.target as HTMLInputElement).value;
-    this.nameChange.emit(inputValue);
-    
   }
+
 }

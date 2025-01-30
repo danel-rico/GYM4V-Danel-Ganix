@@ -6,6 +6,8 @@ import { CarruselComponent } from "./carrusel/carrusel.component";
 import { BarraBusquedaAnyadirComponent } from "./barra-busqueda-anyadir/barra-busqueda-anyadir.component";
 import { ActividadesComponent } from "./actividades/actividades.component";
 import { FooterComponent } from "./footer/footer.component";
+import { MonitorService } from './servicios/monitor.service';
+import { Monitor } from './modelos/monitor';
 
 @Component({
   selector: 'app-root',
@@ -16,15 +18,19 @@ import { FooterComponent } from "./footer/footer.component";
     BarraBusquedaAnyadirComponent,
     ActividadesComponent,
     FooterComponent
-],
+  ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
   title = 'GYM4V-Danel-Ganix';
-  view: 'monitores' | 'actividades' = 'monitores'; 
+  view: 'monitores' | 'actividades' = 'monitores';
 
+  monitors: Monitor[] = []; 
+  constructor(private monitorService: MonitorService) { }
   setView(view: 'monitores' | 'actividades') {
     this.view = view;
   }
+
+  
 }

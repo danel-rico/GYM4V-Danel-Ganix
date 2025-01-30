@@ -14,12 +14,12 @@ export class CardMonitorComponent {
   @Output() editar = new EventEmitter<string>();
 
   constructor(private monitorService: MonitorService) {}
-  onEliminar(): void {
+  onDelete(): void {
     if (this.monitor) {
       this.eliminar.emit(this.monitor.nombre);
     }
   }
-  onEditar(): void{
+  onEdit(): void{
     if(this.monitor){
       this.editar.emit(this.monitor.nombre);
     }

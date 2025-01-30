@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, input, Input, OnInit } from '@angular/core';
 import { Monitor } from '../modelos/monitor';
 import { MonitorService } from '../servicios/monitor.service';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
@@ -15,13 +15,13 @@ import { EditarFormComponent } from '../editar-form/editar-form.component';
   styleUrls: ['./carrusel.component.scss']
 })
 export class CarruselComponent implements OnInit {
-  monitors: Monitor[] = [];       // Lista completa de monitores
+  monitors: Monitor[] = [];
   visibleMonitors: Monitor[] = []; // Monitores visibles en el carrusel
   currentIndex: number = 0;        // Índice del carrusel
-  itemsPerPage: number = 3;        // Elementos visibles por página
+  itemsPerPage: number = 3;     // Elementos visibles por página
 
   constructor(private monitorsService: MonitorService, private dialog: MatDialog) { }
-
+  
   ngOnInit(): void {
     this.loadMonitors();
   }
@@ -48,17 +48,17 @@ export class CarruselComponent implements OnInit {
 
   prevSlide(): void {
     if (this.currentIndex > 0) {
-      this.currentIndex--;
+      this.currentIndex--;      
       this.updateVisibleMonitors();
     }
   }
 
-  eliminarMonitor(nombre: string): void {
+  deleteMonitor(nombre: string): void {
     this.monitorsService.deleteMonitorByName(nombre);
     this.loadMonitors()
   }
 
-  editarMonitor(monitor: string): void {
+  editMonitor(monitor: string): void {
 
     const dialogRef = this.dialog.open(EditarFormComponent, { width: '650px', data: monitor });
 

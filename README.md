@@ -1,70 +1,59 @@
-# Proyecto GYM4V - Danel Rico y Ganix Gorosabel
+# GYM4VDanelGanix
 
-> Proyecto desarrollado en Angular para la asignatura de **Desarrollo de Interfaces**.
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
 
-## Descripción del proyecto
+## Development server
 
-El objetivo principal del proyecto es gestionar las actividades y monitores de un gimnasio ficticio llamado **4V Gym**. A través de una interfaz sencilla e intuitiva, los usuarios pueden:
+To start a local development server, run:
 
-- Ver un listado de actividades programadas por día.
-- Editar, eliminar o añadir nuevas actividades.
-- Consultar información sobre los monitores del gimnasio.
-- Buscar y gestionar los datos de los monitores.
+```bash
+ng serve
+```
 
-El proyecto utiliza **Angular**, que combina:
-- **TypeScript** para la lógica.
-- **HTML** para la estructura.
-- **SCSS** para el diseño visual.
+Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-Más información sobre Angular: [Angular Documentation](https://angular.io/).
+## Code scaffolding
 
----
+Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
 
-## Instalación
+```bash
+ng generate component component-name
+```
 
-### Clonar el repositorio
+For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
 
-Para descargar el proyecto, tienes dos opciones:
+```bash
+ng generate --help
+```
 
-1. **Clonar el repositorio** usando Git:
+## Building
 
-   ```bash
-   git clone https://github.com/danel-rico/GYM4V-Danel-Ganix.git
+To build the project run:
 
-2. **Descargar como ZIP**:
-   - Pulsa el botón verde **Code**.
-   - Selecciona **Download ZIP**.
-   - Extrae el archivo ZIP en tu sistema.
+```bash
+ng build
+```
 
-### Configurar el proyecto
+This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
 
-1. Abre la carpeta del proyecto en **Visual Studio Code**.
-2. Abre un terminal (Command Prompt o integrado de VS Code).
-3. Instala las dependencias necesarias:
+## Running unit tests
 
-   ```bash
-   npm install
-   
-4. Ejecuta el proyecto:
+To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-   ```bash
-   ng serve
+```bash
+ng test
+```
 
-5. Accede al proyecto desde tu navegador en: `http://localhost:4200/`
+## Running end-to-end tests
 
+For end-to-end (e2e) testing, run:
 
-## Equipo
+```bash
+ng e2e
+```
 
-- **Danel Rico**: Responsable de la configuración inicial, diseño de monitores y documentación técnica.
-- **Ganix Gorosabel**: Responsable de la funcionalidad de actividades y diseño de la interfaz.
+Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
 
----
+## Additional Resources
 
-## Recursos
-
-- [Angular Documentation](https://angular.io/)
-- [Node.js](https://nodejs.org/)
-- [Visual Studio Code](https://code.visualstudio.com/)
-
-
-
+For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
