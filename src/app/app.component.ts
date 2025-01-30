@@ -8,6 +8,7 @@ import { ActividadesComponent } from "./actividades/actividades.component";
 import { FooterComponent } from "./footer/footer.component";
 import { MonitorService } from './servicios/monitor.service';
 import { Monitor } from './modelos/monitor';
+import { SearchAddBarComponent } from "./search-add-bar/search-add-bar.component";
 
 @Component({
   selector: 'app-root',
@@ -15,10 +16,10 @@ import { Monitor } from './modelos/monitor';
     CommonModule,
     NavbarComponent,
     CarruselComponent,
-    BarraBusquedaAnyadirComponent,
     ActividadesComponent,
-    FooterComponent
-  ],
+    FooterComponent,
+    SearchAddBarComponent
+],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
